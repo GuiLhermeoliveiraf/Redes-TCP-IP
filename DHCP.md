@@ -29,6 +29,10 @@ O processo de concessão de IP via DHCP envolve quatro passos, conhecidos pela s
 4. **DHCP Acknowledgment (ACK)**  
    O servidor confirma a concessão e envia os detalhes da configuração de rede.
 
+#### Exemplo
+
+![Image](https://github.com/user-attachments/assets/0414b589-6bd6-4748-a13a-d1563f643060)
+
 ---
 
 ## 📆 Concessão (Lease) de IPs
