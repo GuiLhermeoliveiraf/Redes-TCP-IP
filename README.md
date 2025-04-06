@@ -142,8 +142,6 @@ Em vez de escrever a máscara completa, usamos a quantidade de bits `1` da másc
 | /30  | 255.255.255.252    | 2                |
 
 ---
-# Laboratório de Protocolos de Redes
----
 
 # 📚 DHCP (Dynamic Host Configuration Protocol)
 
