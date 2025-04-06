@@ -48,3 +48,72 @@ O DHCP está presente em praticamente todos os ambientes de rede:
 - **Redes domésticas**: Roteadores residenciais normalmente já atuam como servidores DHCP.
 - **Ambientes corporativos e escolas**: Uso de servidores dedicados, como o DHCP do Windows Server.
 - **Provedores de internet (ISPs)**: Distribuição de IPs dinâmicos para clientes residenciais ou empresariais.
+---
+
+## Laboratorio de teste 
+
+![Image](https://github.com/user-attachments/assets/74c38704-6194-435e-88cc-3fb79b64609e)
+
+Este laboratório mostra uma topologia de rede com DHCP configurado em um roteador, permitindo que os dispositivos da rede (PCs) obtenham seus endereços IP automaticamente. Abaixo está uma explicação detalhada dos componentes e da configuração:
+
+🧠 Objetivo do Laboratório
+Demonstrar como configurar um servidor DHCP em um roteador (R1) para distribuir IPs na rede 10.99.99.0/24 aos PCs conectados.
+
+📌 Configuração do DHCP no Roteador (R1)
+A caixa verde à esquerda mostra os comandos usados no roteador:
+
+shell
+Copiar
+Editar
+dhcp enable
+dhcp server database enable
+
+ip pool DHCP-SERVER
+ gateway-list 10.99.99.254
+ network 10.99.99.0 mask 255.255.255.0
+ dns-list 222.222.222.222
+
+interface GigabitEthernet0/0/0
+ description DHCP-SERVER
+ ip address 10.99.99.254 255.255.255.0
+ dhcp select global
+Explicação:
+dhcp enable: Habilita o serviço DHCP.
+
+ip pool DHCP-SERVER: Cria um pool de endereços DHCP.
+
+gateway-list 10.99.99.254: Define o gateway padrão (o próprio roteador).
+
+dns-list 222.222.222.222: Define o servidor DNS.
+
+network 10.99.99.0: Define o escopo da rede.
+
+A interface GE0/0/0 recebe IP fixo e será usada para distribuir os IPs via DHCP.
+
+🔌 Topologia de Rede
+R1: Roteador com IP fixo 10.99.99.254, atuando como servidor DHCP.
+
+Switches (LSW1, LSW2, LSW3): Conectam os PCs ao roteador. Eles apenas repassam o tráfego (sem configuração especial).
+
+PC1, PC2, PC3: Dispositivos finais que recebem IPs automaticamente do DHCP:
+
+PC1: 10.99.99.1
+
+PC2: 10.99.99.22
+
+PC3: 10.99.99.3
+
+📡 Rede utilizada
+Rede: 10.99.99.0/24
+
+Gateway padrão: 10.99.99.254 (roteador)
+
+DNS: 222.222.222.222
+
+✅ Funcionamento Esperado
+O roteador distribui IPs dentro da faixa 10.99.99.1 – 10.99.99.253.
+
+Os PCs solicitam IPs via DHCP e recebem IP, máscara, gateway e DNS automaticamente.
+
+Os switches apenas encaminham os pacotes entre os dispositivos e o roteador.
+
